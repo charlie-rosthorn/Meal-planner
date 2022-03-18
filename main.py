@@ -18,13 +18,7 @@ def meal_planner():
     new_recipe_input_list = []
 
     print("Here are the recipes in the system: \n"
-          "Nuggets and Chips\n"
-          "Salmon with Salad\n"
-          "Yummy bread\n"
-          "Cereal\n"
-          "Toast\n"
-          "Roast Potatoes\n"
-          "Salmon Roast\n")
+          "Nuggets and Chips, Salmon with Salad, Yummy bread, Cereal, Toast, Roast Potatoes, and Salmon Roast.")
 
     correct = 0
     ultimate_correct = 0
@@ -51,7 +45,10 @@ def meal_planner():
                             correct += 1
                     if new_ingredient not in ingredients_list:
                         ingredients_list.append(new_ingredient)
-                        print("Updated recipe list: \n" + str(ingredients_list))
+                        print("Updated ingredient list: \n", end="")
+                        for i in ingredients_list:
+                            print(i, end=". ")
+                        print("")
                         ingredients_list.append(new_ingredient)
                         new_recipe_input_list.append(new_ingredient)
                         new_ingredient2 = input("Add second ingredient for this recipe\n").capitalize()
@@ -64,47 +61,59 @@ def meal_planner():
                                 correct += 1
                         if new_ingredient2 not in ingredients_list:
                             ingredients_list.append(new_ingredient2)
-                            print("Updated recipe list: \n" + str(ingredients_list))
+                            print("Updated ingredient list: \n", end="")
+                            for i in ingredients_list:
+                                print(i, end=". ")
+                            print("")
                             ingredients_list.append(new_ingredient2)
                             new_recipe_input_list.append(new_ingredient2)
-                            another_new_ingredient_question = input("Add another ingredient for recipe?\n").capitalize()
-                            if another_new_ingredient_question in yes_responses:
-                                repeat_question = 0
-                                while repeat_question == 0:
-                                    if another_new_ingredient_question in yes_responses:
-                                        another_new_ingredient\
-                                            = input("Add another ingredient for this recipe\n").capitalize()
-                                        if another_new_ingredient in ingredients_list:
-                                            print("Sorry, please try again")
-                                        else:
-                                            ingredients_list.append(another_new_ingredient)
-                                            print("Updated recipe list: \n" + str(ingredients_list))
-                                            ingredients_list.append(another_new_ingredient)
-                                            new_recipe_input_list.append(another_new_ingredient)
-                                            another_new_ingredient_question\
-                                                = input("Add another ingredient for recipe?\n").capitalize()
+                            repeat_question = 0
+                            while repeat_question == 0:
+                                another_new_ingredient_question = \
+                                    input("Add another ingredient for recipe?\n").capitalize()
+                                if another_new_ingredient_question in yes_responses:
+                                    repeat_question = 0
+                                    while repeat_question == 0:
                                         if another_new_ingredient_question in yes_responses:
-                                            repeat_question = 0
-                                        elif another_new_ingredient_question in no_responses:
-                                            repeat_question = 1
-                                            correct += 1
-                                            ultimate_correct += 1
-                                        else:
-                                            another_new_ingredient_question\
-                                                = input("Add another ingredient for recipe?\n").capitalize()
-                            elif another_new_ingredient_question in no_responses:
-                                correct += 1
-                                ultimate_correct += 1
-                            else:
-                                print("Sorry, please try again")
+                                            another_new_ingredient\
+                                                = input("Add another ingredient for this recipe\n").capitalize()
+                                            if another_new_ingredient in ingredients_list:
+                                                print("Sorry, please try again")
+                                            else:
+                                                ingredients_list.append(another_new_ingredient)
+                                                print("Updated ingredient list: \n", end="")
+                                                for i in ingredients_list:
+                                                    print(i, end=". ")
+                                                print("")
+                                                ingredients_list.append(another_new_ingredient)
+                                                new_recipe_input_list.append(another_new_ingredient)
+                                                another_new_ingredient_question\
+                                                    = input("Add another ingredient for recipe?\n").capitalize()
+                                            if another_new_ingredient_question in yes_responses:
+                                                repeat_question = 0
+                                            elif another_new_ingredient_question in no_responses:
+                                                repeat_question = 1
+                                                correct += 1
+                                                ultimate_correct += 1
+                                            else:
+                                                another_new_ingredient_question\
+                                                    = input("Add another ingredient for recipe?\n").capitalize()
+                                elif another_new_ingredient_question in no_responses:
+                                    correct += 1
+                                    ultimate_correct += 1
+                                else:
+                                    print("Sorry, please try again")
         elif new_recipe in no_responses:
             correct += 1
 
         else:
             print("Sorry, please try again")
 
-    print("Brilliant\n")
-    print("Here are a list of ingredients you can add: \n" + str(ingredients_list))  # 1: Get three  ingredients
+    print("Brilliant")
+    print("Here are a list of ingredients yoo might have to make a recipe with: \n", end="")
+    for i in ingredients_list:
+        print(i, end=". ")
+    print("")
     first_ingredient = input("Add your first ingredient from the list to plan a meal: ").capitalize()
     correct_counter = 0
     while correct_counter < 1:
